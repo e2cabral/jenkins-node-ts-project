@@ -7,14 +7,14 @@ pipeline {
 
     stage('Git') {
       steps {
-        git 'https://github.com/****/****'
+        git 'https://github.com/e2cabral/jenkins-node-ts-project.git'
       }
     }
 
     stage('Build') {
       steps {
         sh 'npm install'
-         sh '<<Build Command>>'
+         sh 'npm run build'
       }
     }
 
