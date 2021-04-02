@@ -11,6 +11,10 @@ export default (app: FastifyInstance) => {
       .get(
         '/users/:id',
         UserController.getById
+      )
+      .post(
+        '/users',
+        UserController.create
       );
     done();
   }, { prefix: 'v1/api' })
