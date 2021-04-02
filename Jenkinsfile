@@ -11,13 +11,17 @@ pipeline {
       }
     }
 
+    stage('Installation') {
+          steps {
+            sh 'npm install'
+          }
+        }
+
     stage('Build') {
       steps {
-        sh 'npm install'
          sh 'npm run build'
       }
     }
-
 
     stage('Test') {
       steps {
