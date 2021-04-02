@@ -21,4 +21,8 @@ export default class UserRepository extends Repository<User> {
       .where('user.id = :id', { id: id })
       .getOne();
   }
+
+  async createUser(user: User): Promise<User> {
+    return await this.save<User>(user);
+  }
 }
