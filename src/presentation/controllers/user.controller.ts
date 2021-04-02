@@ -1,5 +1,6 @@
 import userService from "../../data/services/user.service";
 import {FastifyReply, FastifyRequest} from "fastify";
+import User from "../../domain/entities/user.entity";
 
 class UserController {
   constructor() {
@@ -15,6 +16,12 @@ class UserController {
     const id = request.params.id
     const user = await userService.getById(id)
     reply.send(user);
+  }
+
+  async create(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+    const user = <User>request.body;
+    const returnedValue = await userService.create(user);
+    reply.send(returnedValue);
   }
 }
 
