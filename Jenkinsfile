@@ -23,10 +23,10 @@ pipeline {
       }
     }
 
-    stage('Test') {
-      steps {
-        sh 'node test'
-      }
-    }
+//     stage('Test') {
+//       steps {
+//         sh 'node test'
+//       }
+//     }
   }
 }
