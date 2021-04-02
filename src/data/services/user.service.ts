@@ -16,4 +16,9 @@ export default class UserService {
     const repository = getCustomRepository(UserRepository);
     return repository.getById(id);
   }
+
+  static create(user: User): Promise<User> {
+    const repository = getCustomRepository(UserRepository);
+    return repository.createUser(user);
+  }
 }
