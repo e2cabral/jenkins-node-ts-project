@@ -9,6 +9,7 @@ DbClient.connect().then(
                 app.log.error(err.message);
                 process.exit(1);
             }
+            app.swagger();
             app.log.info(`Server is running on ${address}`);
         });
     },
