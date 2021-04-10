@@ -25,4 +25,12 @@ export default class UserRepository extends Repository<User> {
   async createUser(user: User): Promise<User> {
     return await this.save<User>(user);
   }
+
+  async deleteUser(id: number | string): Promise<void> {
+    await this
+      .createQueryBuilder('user')
+      .delete()
+      .where('user.id = id', { id: id })
+      .execute();
+  }
 }

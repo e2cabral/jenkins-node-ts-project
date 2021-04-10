@@ -23,6 +23,20 @@ class UserController {
     const returnedValue = await userService.create(user);
     reply.send(returnedValue);
   }
+
+  async delete(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+    try {
+      // @ts-ignore
+      const id = request.params.id;
+      await userService.delete(id);
+      reply.send({
+        status: 200,
+        message: 'User deleted successfully!'
+      });
+    } catch(err) {
+      reply.send(err);
+    }
+  }
 }
 
 export default new UserController();

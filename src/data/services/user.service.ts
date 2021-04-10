@@ -21,4 +21,9 @@ export default class UserService {
     const repository = getCustomRepository(UserRepository);
     return repository.createUser(user);
   }
+
+  static async delete(id: number | string): Promise<void> {
+    const repository = getCustomRepository(UserRepository);
+    await repository.deleteUser(id);
+  }
 }
