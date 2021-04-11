@@ -3,11 +3,13 @@ import UserController from '../../presentation/controllers/user.controller'
 
 export default (app: FastifyInstance) => {
   app.register((instance: FastifyInstance, opts, done) => {
+
     instance
       .get(
         '/users',
         {
           schema: {
+            // @ts-ignore
             description: 'Obtain all users registred.',
             tags: ['get-all-users'],
           }
@@ -18,10 +20,11 @@ export default (app: FastifyInstance) => {
         '/users/:id',
         {
           schema: {
+            // @ts-ignore
             description: 'Obtain a user registred by the id.',
             tags: ['get-user-by-id'],
             params: {
-              id: { type: 'number' }
+              id: { type: 'number' },
             }
           }
         },
@@ -31,6 +34,7 @@ export default (app: FastifyInstance) => {
         '/users',
         {
           schema: {
+            // @ts-ignore
             description: 'Register aa new user.',
             tags: ['user-registration'],
             summary: 'qwerty',
@@ -40,9 +44,10 @@ export default (app: FastifyInstance) => {
                 id: { type: 'number' },
                 username: { type: 'string' },
                 name: { type: 'string' }
-              }
+              },
+              required: ['username', 'name']
             }
-          }
+          },
         },
         UserController.create
       )
@@ -50,11 +55,12 @@ export default (app: FastifyInstance) => {
         '/users/:id',
         {
           schema: {
+            // @ts-ignore
             description: 'Delete a user',
             tags: ['delete-user'],
             summary: 'qwerty',
             params: {
-              id: { type: 'number' }
+              id: { type: 'number' },
             }
           }
         },
