@@ -1,10 +1,6 @@
 import swagger from 'fastify-swagger';
 import { FastifyInstance } from 'fastify';
 
-export default (app: FastifyInstance): void => {
-  app.register(swagger, Options);
-};
-
 export const Options = {
   routePrefix: '/documentation',
   exposeRoute: true,
@@ -23,4 +19,8 @@ export const Options = {
     consumes: ['application/json'],
     produces: ['application/json'],
   },
+};
+
+export default (app: FastifyInstance): void => {
+  app.register(swagger, Options);
 };

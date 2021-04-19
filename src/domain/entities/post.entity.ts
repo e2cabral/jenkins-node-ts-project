@@ -1,5 +1,7 @@
-import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import User from "./user.entity";
+import {
+  Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn,
+} from 'typeorm';
+import User from './user.entity';
 
 @Entity('post')
 export default class Post {
@@ -17,7 +19,7 @@ export default class Post {
 
   @ManyToOne(
     () => User,
-    user => user.posts,
+    (user) => user.posts,
   )
   @JoinColumn({ name: 'user_id' })
   user!: User;

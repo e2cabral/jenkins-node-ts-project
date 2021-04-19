@@ -1,11 +1,8 @@
-import userService from "../../data/services/user.service";
-import {FastifyReply, FastifyRequest} from "fastify";
-import User from "../../domain/entities/user.entity";
+import { FastifyReply, FastifyRequest } from 'fastify';
+import userService from '../../data/services/user.service';
+import User from '../../domain/entities/user.entity';
 
 class UserController {
-  constructor() {
-  }
-
   async getAll(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     const users = await userService.getAll();
     reply.send(users);
@@ -13,8 +10,8 @@ class UserController {
 
   async getById(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     // @ts-ignore
-    const id = request.params.id
-    const user = await userService.getById(id)
+    const { id } = request.params;
+    const user = await userService.getById(id);
     reply.send(user);
   }
 
@@ -27,13 +24,13 @@ class UserController {
   async delete(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     try {
       // @ts-ignore
-      const id = request.params.id;
+      const { id } = request.params;
       await userService.delete(id);
       reply.send({
         status: 200,
-        message: 'User deleted successfully!'
+        message: 'User deleted successfully!',
       });
-    } catch(err) {
+    } catch (err) {
       reply.send(err);
     }
   }

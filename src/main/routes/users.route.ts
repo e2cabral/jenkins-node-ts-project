@@ -1,20 +1,19 @@
-import {FastifyInstance} from "fastify";
-import UserController from '../../presentation/controllers/user.controller'
+import { FastifyInstance } from 'fastify';
+import UserController from '../../presentation/controllers/user.controller';
 
 export default (app: FastifyInstance) => {
   app.register((instance: FastifyInstance, opts, done) => {
-
     instance
       .get(
         '/users',
         {
           schema: {
             // @ts-ignore
-            description: 'Obtain all users registred.',
+            description: 'Obtain all users registered.',
             tags: ['get-all-users'],
-          }
+          },
         },
-        UserController.getAll
+        UserController.getAll,
       )
       .get(
         '/users/:id',
@@ -25,10 +24,10 @@ export default (app: FastifyInstance) => {
             tags: ['get-user-by-id'],
             params: {
               id: { type: 'number' },
-            }
-          }
+            },
+          },
         },
-        UserController.getById
+        UserController.getById,
       )
       .post(
         '/users',
@@ -43,13 +42,13 @@ export default (app: FastifyInstance) => {
               properties: {
                 id: { type: 'number' },
                 username: { type: 'string' },
-                name: { type: 'string' }
+                name: { type: 'string' },
               },
-              required: ['username', 'name']
-            }
+              required: ['username', 'name'],
+            },
           },
         },
-        UserController.create
+        UserController.create,
       )
       .delete(
         '/users/:id',
@@ -61,11 +60,11 @@ export default (app: FastifyInstance) => {
             summary: 'qwerty',
             params: {
               id: { type: 'number' },
-            }
-          }
+            },
+          },
         },
-        UserController.delete
+        UserController.delete,
       );
     done();
   }, { prefix: 'v1/api' });
-}
+};

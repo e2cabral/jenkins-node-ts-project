@@ -1,5 +1,7 @@
-import {Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from "typeorm";
-import Post from "./post.entity";
+import {
+  Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn,
+} from 'typeorm';
+import Post from './post.entity';
 
 @Entity({ name: 'user' })
 export default class User {
@@ -14,7 +16,7 @@ export default class User {
 
   @OneToMany(
     () => Post,
-    posts => posts.user
+    (posts) => posts.user,
   )
   @JoinColumn({ name: 'id' })
   posts?: Post[];
