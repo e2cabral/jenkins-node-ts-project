@@ -4,29 +4,45 @@ import User from '../../domain/entities/user.entity';
 @EntityRepository(User)
 export default class UserRepository extends Repository<User> {
   getAll(): Promise<User[]> {
-    return this
-      .createQueryBuilder('user')
-      .innerJoinAndSelect('user.posts', 'posts')
-      .getMany();
+    try {
+      return this
+        .createQueryBuilder('user')
+        .innerJoinAndSelect('user.posts', 'posts')
+        .getMany();
+    } catch (err) {
+      throw new Error(err.message);
+    }
   }
 
   getById(id: number | string): Promise<User | undefined> {
-    return this
-      .createQueryBuilder('user')
-      .innerJoinAndSelect('user.posts', 'posts')
-      .where('user.id = :id', { id })
-      .getOne();
+    try {
+      return this
+        .createQueryBuilder('user')
+        .innerJoinAndSelect('user.posts', 'posts')
+        .where('user.id = :id', { id })
+        .getOne();
+    } catch (err) {
+      throw new Error(err.message);
+    }
   }
 
   async createUser(user: User): Promise<User> {
-    return this.save<User>(user);
+    try {
+      return this.save<User>(user);
+    } catch (err) {
+      throw new Error(err.message);
+    }
   }
 
   async deleteUser(id: number | string): Promise<void> {
-    await this
-      .createQueryBuilder('user')
-      .delete()
-      .where('user.id = id', { id })
-      .execute();
+    try {
+      await this
+        .createQueryBuilder('user')
+        .delete()
+        .where('user.id = id', { id })
+        .execute();
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
   }
 }

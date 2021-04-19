@@ -1,24 +1,36 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import userService from '../../data/services/user.service';
+import userService from '../../domain/usecases/services/user.service';
 import User from '../../domain/entities/user.entity';
 
 class UserController {
   async getAll(request: FastifyRequest, reply: FastifyReply): Promise<void> {
-    const users = await userService.getAll();
-    reply.send(users);
+    try {
+      const users = await userService.getAll();
+      reply.send(users);
+    } catch (err) {
+      reply.code(err.status).send(err);
+    }
   }
 
   async getById(request: FastifyRequest, reply: FastifyReply): Promise<void> {
-    // @ts-ignore
-    const { id } = request.params;
-    const user = await userService.getById(id);
-    reply.send(user);
+    try {
+      // @ts-ignore
+      const { id } = request.params;
+      const user = await userService.getById(id);
+      reply.send(user);
+    } catch (err) {
+      reply.code(err.status).send(err);
+    }
   }
 
   async create(request: FastifyRequest, reply: FastifyReply): Promise<void> {
-    const user = <User>request.body;
-    const returnedValue = await userService.create(user);
-    reply.send(returnedValue);
+    try {
+      const user = <User>request.body;
+      const returnedValue = await userService.create(user);
+      reply.send(returnedValue);
+    } catch (err) {
+      reply.code(err.status).send(err);
+    }
   }
 
   async delete(request: FastifyRequest, reply: FastifyReply): Promise<void> {
@@ -31,7 +43,7 @@ class UserController {
         message: 'User deleted successfully!',
       });
     } catch (err) {
-      reply.send(err);
+      reply.code(err.status).send(err);
     }
   }
 }
